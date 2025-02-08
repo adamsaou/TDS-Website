@@ -8,6 +8,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
     <header>
         <h1>Thunder Stalkers</h1>
         <p>Your ultimate Discord community for gaming and fun!</p>
@@ -28,7 +45,9 @@
         <div class="section">
             <h2>Join Us</h2>
             <p>Ready to join the Thunder Stalkers? Click the button below to join our Discord server!</p>
-            <a href="https://discord.gg/vkt3XjZFnE" class="join-button" target="_blank">Join Now</a>
+            <div style="text-align: center;"> <!-- Center the button -->
+                <a href="https://discord.gg/vkt3XjZFnE" class="join-button" target="_blank">Join Now</a>
+            </div>
         </div>
     </div>
 </body>
