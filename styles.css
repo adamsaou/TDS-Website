@@ -134,35 +134,70 @@ header p {
     background: linear-gradient(45deg, #ffd700, #ffaa00); /* Gold/yellow gradient */
     color: #000000; /* Black text for contrast */
     text-decoration: none;
-    border-radius: 12px; /* Slightly larger border radius */
+    border-radius: 50px; /* Start with a pill shape */
     font-size: 1.4em; /* Slightly larger font size */
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px; /* Increased letter spacing */
-    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    transition: all 0.5s ease-in-out; /* Smooth transition for all properties */
     box-shadow: 0 6px 15px rgba(255, 215, 0, 0.5); /* Gold/yellow shadow */
-    animation: pulseButton 1.5s infinite ease-in-out; /* Faster animation */
+    animation: shapeShift 5s infinite ease-in-out; /* Shape-shifting animation */
     text-align: center; /* Center text inside the button */
+    position: relative;
+    overflow: hidden;
 }
 
 .join-button:hover {
-    transform: translateY(-5px) scale(1.05); /* Slight scale-up on hover */
-    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.8); /* Stronger gold/yellow shadow */
-    background: linear-gradient(45deg, #ffaa00, #ffd700); /* Reverse gradient on hover */
+    animation: none; /* Stop shape-shifting on hover */
+    transform: scale(1.1); /* Slightly scale up */
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.8), 0 0 50px rgba(255, 215, 0, 0.6); /* Glow effect */
+    border-radius: 12px; /* Change to a sharper shape */
+    background: linear-gradient(45deg, #ffaa00, #ffd700); /* Reverse gradient */
 }
 
-@keyframes pulseButton {
+.join-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 10%, transparent 70%); /* Radial glow */
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease-in-out;
+    z-index: 0;
+}
+
+.join-button:hover::before {
+    transform: translate(-50%, -50%) scale(1); /* Expand radial glow on hover */
+}
+
+.join-button span {
+    position: relative;
+    z-index: 1; /* Ensure text is above the glow */
+}
+
+@keyframes shapeShift {
     0% {
+        border-radius: 50px; /* Pill shape */
         transform: scale(1);
-        box-shadow: 0 6px 15px rgba(255, 215, 0, 0.5);
+    }
+    25% {
+        border-radius: 30px; /* Slightly sharper */
+        transform: scale(1.05);
     }
     50% {
-        transform: scale(1.05);
-        box-shadow: 0 10px 25px rgba(255, 215, 0, 0.8);
+        border-radius: 20px; /* Even sharper */
+        transform: scale(1);
+    }
+    75% {
+        border-radius: 40px; /* Back to pill shape */
+        transform: scale(0.95);
     }
     100% {
+        border-radius: 50px; /* Return to original shape */
         transform: scale(1);
-        box-shadow: 0 6px 15px rgba(255, 215, 0, 0.5);
     }
 }
+
 
